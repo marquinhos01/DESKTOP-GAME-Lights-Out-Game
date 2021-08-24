@@ -13,6 +13,7 @@ import javax.swing.JTextField;
 import javax.swing.JRadioButton;
 import javax.swing.JButton;
 import java.awt.Button;
+import javax.swing.SwingConstants;
 
 public class Menu {
 
@@ -46,16 +47,13 @@ public class Menu {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		
 		FrameMenu = new JFrame();
 		FrameMenu.getContentPane().setBackground(new Color(0, 0, 51));
 		FrameMenu.setBounds(100, 100, 450, 300);
 		FrameMenu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		FrameMenu.getContentPane().setLayout(null);
 		
-		//imagen background menu
-		JLabel contenedorImagen = new JLabel("");
-		ImageIcon backgroundImageMenu = new ImageIcon(this.getClass().getResource("/back.jpg"));
-	
 		
 		//botones
 		Button btn_verHistorial = new Button("Historial");
@@ -102,6 +100,17 @@ public class Menu {
 		btnRadioCinco.setBackground(new Color(153, 153, 153));
 		btnRadioCinco.setBounds(246, 94, 43, 23);
 		FrameMenu.getContentPane().add(btnRadioCinco);
+		
+		//imagen background menu
+		ImageIcon backgroundImageMenu = new ImageIcon(this.getClass().getResource("/backgroundMenu.jpg"));
+		JLabel contenedorImg = new JLabel("");
+		contenedorImg.setVerticalAlignment(SwingConstants.BOTTOM);
+		contenedorImg.setIcon(backgroundImageMenu);
+		contenedorImg.setBounds(0, 0, 434, 261);
+		FrameMenu.getContentPane().add(contenedorImg);		
+	
+		
+		
 		
 		
 	}
