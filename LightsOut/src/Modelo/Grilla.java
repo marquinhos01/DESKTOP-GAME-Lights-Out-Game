@@ -15,7 +15,7 @@ public class Grilla {
 	}
 	
 	//Suponiendo que inicialmente se pintan 4 casillas
-	private void crearGrilla() {
+	public void iniciarGrilla() {
 		int k=0;
 		ArrayList<String> indices = new ArrayList<String>();
 		while(k<4) {
@@ -44,7 +44,7 @@ public class Grilla {
 		{
 			for (int j = 0; j < 4; j++)
 			{
-				sb.append(casillas[i][j].toString() + "   ");
+				sb.append(casillas[i][j] + "   ");
 			}
 			sb.append("\n\n");
 		}
