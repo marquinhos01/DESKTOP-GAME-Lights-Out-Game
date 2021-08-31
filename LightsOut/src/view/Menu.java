@@ -4,24 +4,24 @@ import java.awt.*;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+
+import Modelo.Grilla;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
-import java.awt.Dialog.ModalExclusionType;
+
 
 public class Menu extends Tamanios {
 
 	private JFrame frame;
 	private int anchoFrame;
-	private int altoFrame;
-	
 	private int anchoObjetos;
 	private JTextField campoNombre;
-	private ImageIcon focoImg;
+	
+	
 
 	/**
 	 * Create the application.
@@ -47,7 +47,7 @@ public class Menu extends Tamanios {
 		int alto = tamanoPantalla.height;
 //		
 		frame = new JFrame();
-		//frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+//		frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
 		frame.setSize(tamanoPantalla);
 		frame.setBounds(anchoPantallaPC/4, 0, anchoPantallaPC/2,
 				alto - 50);
@@ -83,7 +83,10 @@ public class Menu extends Tamanios {
 			        frame.dispose();
 			        VistaJuego window = new VistaJuego();
 					window.getMainFrame().setVisible(true);
-			        
+				
+					Grilla n = new Grilla();
+					n.iniciarGrilla();
+					System.out.println(n.toString());
 			}
 		});
 		btnJugar.setBackground(Color.LIGHT_GRAY);
