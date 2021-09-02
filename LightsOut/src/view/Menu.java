@@ -16,128 +16,171 @@ import javax.swing.JTextField;
 
 public class Menu extends Tamanios {
 
-	private JFrame frame;
-	private int anchoFrame;
-	private int anchoObjetos;
-	private JTextField campoNombre;
-	
-	
+	private JFrame ventana;
 
-	/**
-	 * Create the application.
-	 */
+	private JTextField campoNombre;
+	private JLabel tituloSuperior;
+	private JButton btnJugar;
+	private JButton btnVerRecord;
+	private JButton btnCambiarMusica;
+	private JLabel labelImagenFondo;
+	private ImageIcon imgMenu;
+
 	public Menu() {
 		super();
 		initialize();
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	public void refrezcar() {
-		initialize();
-	}
-
 	public void initialize() {
+		ventana = new JFrame();
 
 		Toolkit miPantalla = Toolkit.getDefaultToolkit();  //devuelve un objeto toolkit ya que es abstracto, devuelve la ventana
 		 Dimension tamanoPantalla = miPantalla.getScreenSize(); //la resolucion de la
-		// pantalla pc 1200x2320
+		 
 		int anchoPantallaPC = tamanoPantalla.width;
 		int alto = tamanoPantalla.height;
 //		
-		frame = new JFrame();
-//		frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
-		frame.setSize(tamanoPantalla);
-		frame.setBounds(anchoPantallaPC/4, 0, anchoPantallaPC/2,
-				alto - 50);
+//		ventana.setBounds(100, 100, 650, 700);
+		ventana.setSize(tamanoPantalla);
+		ventana.setBounds(anchoPantallaPC/4, 0, anchoPantallaPC/2, alto - 50);
 	//	frame.setUndecorated(true);
-		frame.setVisible(true);
-		anchoFrame = frame.getWidth();
-		frame.setResizable(false);
+		
+		ventana.setResizable(false);
 
 		// frame.setExtendedState(6);
-		frame.setTitle("primera tabla");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+		ventana.setTitle("primera tabla");
+		ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		ventana.getContentPane().setLayout(null);
 
-		altoFrame = frame.getHeight();
-		centrarObjetoHorizontal = anchoFrame / 4;
 
-		anchoObjetos =super.getAnchoObjeto(frame);
 
-		JLabel titulo = new JLabel("Lights Outs");
 
-		titulo.setHorizontalAlignment(SwingConstants.CENTER);
-		titulo.setFont(new Font("Snap ITC", Font.PLAIN, 44));
+		tituloSuperior = new JLabel("Lights Outs");
 
-		titulo.setSize(anchoObjetos, 76);
-		titulo.setLocation(titulo.getWidth() / 2, 0);
+		tituloSuperior.setHorizontalAlignment(SwingConstants.CENTER);
+		tituloSuperior.setFont(new Font("Snap ITC", Font.PLAIN, 44));
 
-		frame.getContentPane().add(titulo);
+		tituloSuperior.setSize(super.getAnchoObjeto(ventana), 76);
+		tituloSuperior.setLocation(tituloSuperior.getWidth() / 2, 0);
 
-		JButton btnJugar = new JButton("JUGAR");
-		btnJugar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-			        frame.dispose();
-			        VistaJuego window = new VistaJuego();
-					window.getMainFrame().setVisible(true);
-				
-					Grilla n = new Grilla();
-					n.iniciarGrilla();
-					System.out.println(n.toString());
-			}
-		});
+		ventana.getContentPane().add(tituloSuperior);
+
+		btnJugar = new JButton("JUGAR");
 		btnJugar.setBackground(Color.LIGHT_GRAY);
 
 		btnJugar.setFont(new Font("Snap ITC", Font.PLAIN, 24));
-		btnJugar.setBounds(centrarObjetoHorizontal(frame), 360, getAnchoObjeto(frame), 62);
+		btnJugar.setBounds(centrarObjetoHorizontal(ventana), 360, getAnchoObjeto(ventana), 62);
 
-		frame.getContentPane().add(btnJugar);
+		ventana.getContentPane().add(btnJugar);
 
-		JButton btnVerRecord = new JButton("MAXIMO RECORD");
+		btnVerRecord = new JButton("MAXIMO RECORD");
 		btnVerRecord.setBackground(Color.LIGHT_GRAY);
 		btnVerRecord.setFont(new Font("Snap ITC", Font.PLAIN, 23));
-		btnVerRecord.setBounds(super.centrarObjetoHorizontal(frame), 445, super.getAnchoObjeto(frame), 54);
-		frame.getContentPane().add(btnVerRecord);
+		btnVerRecord.setBounds(super.centrarObjetoHorizontal(ventana), 445, super.getAnchoObjeto(ventana), 54);
+		ventana.getContentPane().add(btnVerRecord);
 
-		JButton cambiarMusica = new JButton("CAMBIAR MUSICA");
-		cambiarMusica.setBackground(Color.LIGHT_GRAY);
-		cambiarMusica.setFont(new Font("Snap ITC", Font.PLAIN, 23));
-		cambiarMusica.setBounds(super.centrarObjetoHorizontal(frame), 526, super.getAnchoObjeto(frame), 54);
-		frame.getContentPane().add(cambiarMusica);
+		btnCambiarMusica = new JButton("CAMBIAR MUSICA");
+		btnCambiarMusica.setBackground(Color.LIGHT_GRAY);
+		btnCambiarMusica.setFont(new Font("Snap ITC", Font.PLAIN, 23));
+		btnCambiarMusica.setBounds(super.centrarObjetoHorizontal(ventana), 526, super.getAnchoObjeto(ventana), 54);
+		ventana.getContentPane().add(btnCambiarMusica);
 
-		JLabel fondoMenu = new JLabel("");
-		ImageIcon imgMenu = new ImageIcon(this.getClass().getResource("/fondoMenu.png"));
-		fondoMenu.setIcon(imgMenu);
-		fondoMenu.setBounds(0, 0, super.getAnchoFrame(frame), super.getAltoFrame(frame));
-		frame.getContentPane().add(fondoMenu);
+		labelImagenFondo = new JLabel("");
+		imgMenu = new ImageIcon(this.getClass().getResource("/fondoMenu.png"));
+		labelImagenFondo.setIcon(imgMenu);
+		labelImagenFondo.setBounds(0, 0, super.getAnchoFrame(ventana), super.getAltoFrame(ventana));
+		ventana.getContentPane().add(labelImagenFondo);
 
 		campoNombre = new JTextField();
 		campoNombre.setHorizontalAlignment(SwingConstants.CENTER);
-		campoNombre.setBounds(super.centrarObjetoHorizontal(frame), 172, super.getAnchoObjeto(frame), 42);
-		frame.getContentPane().add(campoNombre);
+		campoNombre.setBounds(super.centrarObjetoHorizontal(ventana), 172, super.getAnchoObjeto(ventana), 42);
+		ventana.getContentPane().add(campoNombre);
 		campoNombre.setColumns(10);
 
+	}	
+	
+
+	public JFrame getVentana() {
+		return ventana;
 	}
 
-	// ++++++++++++++++++++++++++++++++++++++++++++ Main
-	// +++++++++++++++++++++++++++++++++++++++++++++
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Menu window = new Menu();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+	public void setVentana(JFrame ventana) {
+		this.ventana = ventana;
 	}
+
+	public JTextField getCampoNombre() {
+		return campoNombre;
+	}
+
+	public void setCampoNombre(JTextField campoNombre) {
+		this.campoNombre = campoNombre;
+	}
+
+	public JLabel getTituloSuperior() {
+		return tituloSuperior;
+	}
+
+	public void setTituloSuperior(JLabel tituloSuperior) {
+		this.tituloSuperior = tituloSuperior;
+	}
+
+	public JButton getBtnJugar() {
+		return btnJugar;
+	}
+
+	public void setBtnJugar(JButton btnJugar) {
+		this.btnJugar = btnJugar;
+	}
+
+	public JButton getBtnVerRecord() {
+		return btnVerRecord;
+	}
+
+	public void setBtnVerRecord(JButton btnVerRecord) {
+		this.btnVerRecord = btnVerRecord;
+	}
+
+	public JButton getBtnCambiarMusica() {
+		return btnCambiarMusica;
+	}
+
+	public void setBtnCambiarMusica(JButton btnCambiarMusica) {
+		this.btnCambiarMusica = btnCambiarMusica;
+	}
+
+	public JLabel getLabelImagenFondo() {
+		return labelImagenFondo;
+	}
+
+	public void setLabelImagenFondo(JLabel labelImagenFondo) {
+		this.labelImagenFondo = labelImagenFondo;
+	}
+
+	public ImageIcon getImgMenu() {
+		return imgMenu;
+	}
+
+	public void setImgMenu(ImageIcon imgMenu) {
+		this.imgMenu = imgMenu;
+	}
+	public void show() {
+		this.ventana.setVisible(true);
+	}
+	public void ocultar() {
+		this.ventana.dispose();
+	}
+
+
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					Menu window = new Menu();
+//					window.show();
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 }

@@ -2,11 +2,13 @@ package view;
 
 import java.awt.EventQueue;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 
 import javax.swing.JTable;
@@ -14,6 +16,7 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
 
 import Modelo.Grilla;
 
@@ -26,7 +29,7 @@ import javax.swing.ImageIcon;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class VistaJuego {
+public class VistaJuego extends Tamanios {
 
 	private JFrame mainFrame;
 	private JTable grillaVista;
@@ -36,7 +39,7 @@ public class VistaJuego {
 	private JLabel labelTitulo;
 	private JButton btnTerminar;
 	private JButton btnCambiarGrilla;
-
+	private DefaultTableModel model;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -51,11 +54,10 @@ public class VistaJuego {
 		});
 	}
 
-
 	public VistaJuego() {
+		super();
 		initialize();
 	}
-
 
 	public void initialize() {
 		Toolkit miPantalla = Toolkit.getDefaultToolkit(); // devuelve un objeto toolkit ya que es abstracto, devuelve la
@@ -65,11 +67,11 @@ public class VistaJuego {
 		int anchoPantallaPC = tamanoPantalla.width;
 		int alto = tamanoPantalla.height;
 		mainFrame = new JFrame();
+
 		getMainFrame().setBackground(Color.BLACK);
 //		getMainFrame().setSize(tamanoPantalla);
-//		getMainFrame().setBounds(anchoPantallaPC/4, 0, anchoPantallaPC/2,
-//				alto - 50);
-		mainFrame.setBounds(100, 100, 650, 700);
+		getMainFrame().setBounds(anchoPantallaPC / 4, 0, anchoPantallaPC / 2, alto - 50);
+
 		getMainFrame().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getMainFrame().getContentPane().setLayout(new BorderLayout(20, 40));
 
@@ -99,69 +101,37 @@ public class VistaJuego {
 		labelTitulo.setFont(new Font("Snap ITC", Font.PLAIN, 34));
 		getMainFrame().getContentPane().add(labelTitulo, BorderLayout.NORTH);
 
-		grillaVista = new JTable(4, 4);
+		grillaVista = new JTable(4, 4) { // evita que se editen las celdas al tocar click
+			private static final long serialVersionUID = 1L;
+
+			public boolean isCellEditable(int row, int column) {
+				return false;
+
+			}
+
+		};
+
+		grillaVista.setBackground(Color.WHITE);
 		grillaVista.setCellSelectionEnabled(true);
 		grillaVista.setRowHeight(120);
 		grillaVista.setFont(new Font("Tahoma", Font.PLAIN, 54));
 
-		DefaultTableCellRenderer dtcr = new DefaultTableCellRenderer();
-
-		Grilla n = new Grilla();
-		n.iniciarGrilla();
-
 		mainFrame.getContentPane().add(grillaVista, BorderLayout.CENTER);
-		DefaultTableModel model = (DefaultTableModel) grillaVista.getModel();
+		
+		
+		model = (DefaultTableModel) grillaVista.getModel();
+		grillaVista.setDefaultRenderer(Object.class, new RenderizadorImg());
 
-//		grillaVista.addMouseListener(new java.awt.event.MouseAdapter() {
-//				@Override
-//			public void mouseClicked(java.awt.event.MouseEvent evt) {
-//				for (int i = 0; i < n.casillas.length; i++) {
-//					for (int j = 0; j < n.casillas.length; j++) {
-//						int row = grillaVista.rowAtPoint(evt.getPoint());
-//						int col = grillaVista.columnAtPoint(evt.getPoint());
-//
-//						if (row == i && col == j) {
-//							n.cambiarEstadoGrilla(i, j);
-//							if (n.estadoCasilla(i, j)) {
-//								dtcr.setBackground(Color.RED);
-//								System.out.println("esta en true");
-//							} else if (n.estadoCasilla(i, j) == false)
-//								System.out.println("esta en false");
-//							System.out.println(n.toString());
-////							System.out.println(i + " " + j);
-//						}
-//					}
-//
-//				}
-//
-//			}
-//
-//		});
+		JLabel imagen = new JLabel();
+		
+		Image img = new ImageIcon(getClass().getResource("/focoPrendido.jpg")).getImage();
+		Image newimg = img.getScaledInstance(super.getAnchoFrame(mainFrame) / 4, grillaVista.getRowHeight(),
+				java.awt.Image.SCALE_SMOOTH);
+		ImageIcon imageIcon = new ImageIcon(newimg);
 
-		// meter un boton en alguna casilla de la tabla
-		// 2 2
-//		JButton aceptar = new JButton("Aceptar");
-//		
-//		aceptar.setBackground(Color.BLACK);
-//		aceptar.setSelectedIcon(new ImageIcon("C:\\Users\\marco\\Desktop\\foco.png"));
-//		aceptar.setFont(new Font("Snap ITC", Font.PLAIN, 18));
-//		grillaVista.add(aceptar);
-//		model.setValueAt(aceptar, 2, 2);
+		imagen.setIcon(imageIcon);
+		grillaVista.setValueAt(imagen, 1, 1);
 
-//		for (int i = 0; i < n.casillas.length; i++) {
-//			for (int j = 0; j < n.casillas.length; j++) {
-//				model.setValueAt(new JButton("boton"), i, j);
-//				
-//			}
-//						
-//		}
-		grillaVista.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mouseClicked(java.awt.event.MouseEvent evt) {
-
-			}
-		});
-
-		System.out.println(n.toString());
 
 	}
 
@@ -212,4 +182,9 @@ public class VistaJuego {
 	public JFrame getMainFrame() {
 		return mainFrame;
 	}
+
+	public void show() {
+		this.mainFrame.setVisible(true);
+	}
+
 }
