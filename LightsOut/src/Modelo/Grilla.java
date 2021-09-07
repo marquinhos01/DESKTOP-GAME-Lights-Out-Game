@@ -37,14 +37,14 @@ public class Grilla {
 	public void cambiarEstadoGrilla(int i, int j) {
 		if (i >= 0 | i < 4 | j >= 0 | j < 4) {
 			this.cambiarEstadoCasilla(i, j);
-//			if (i < 3)
-//				this.cambiarEstadoCasilla(i + 1, j);
-//			if (i > 0)
-//				this.cambiarEstadoCasilla(i - 1, j);
-//			if (j < 3)
-//				this.cambiarEstadoCasilla(i, j + 1);
-//			if (j > 0)
-//				this.cambiarEstadoCasilla(i, j - 1);
+			if (i < 3)
+				this.cambiarEstadoCasilla(i + 1, j);
+			if (i > 0)
+				this.cambiarEstadoCasilla(i - 1, j);
+			if (j < 3)
+				this.cambiarEstadoCasilla(i, j + 1);
+			if (j > 0)
+				this.cambiarEstadoCasilla(i, j - 1);
 		}
 	}
 
