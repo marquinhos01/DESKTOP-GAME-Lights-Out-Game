@@ -30,7 +30,29 @@ public class Controlador {
 				filaGrilla = ventanaJuego.getGrillaVista().rowAtPoint(evt.getPoint());
 				columnaGrilla = ventanaJuego.getGrillaVista().columnAtPoint(evt.getPoint());
 				grilla.cambiarEstadoGrilla(filaGrilla, columnaGrilla);
+
+				
+				if (grilla.todosFalse()) { //gane!
+					ventanaJuego.getMainFrame().setVisible(false);
+				}
+				
+				
 				System.out.println(grilla.toString());
+
+				//cambio imagen de casillas
+				/*aca puede estar el error, tarda en verificar por cada click
+				 * 
+				 */
+				for (int i = 0; i < grilla.casillas.length; i++) {
+					for (int j = 0; j < grilla.casillas.length; j++) {
+						if (grilla.estadoCasilla(i, j)) {
+							ventanaJuego.cambiarImagenesFocoPrendido(i, j);
+						} else
+							ventanaJuego.cambiarImagenesFocoApagado(i, j);
+					}
+				}
+
+				
 			}
 		});
 	}
@@ -40,13 +62,18 @@ public class Controlador {
 		ventanaJuego.show();
 		grilla.iniciarGrilla();
 		System.out.println(grilla.toString());
+		for (int i = 0; i < grilla.casillas.length; i++) {
+			for (int j = 0; j < grilla.casillas.length; j++) {
+				if (grilla.estadoCasilla(i, j) == true) {
+					ventanaJuego.cambiarImagenesFocoPrendido(i, j);
+				} else {
+					ventanaJuego.cambiarImagenesFocoApagado(i, j);
+				}
+			}
+
+		}
 	}
 
-	public static void main(String[] args) {
 
-		Menu menu = new Menu();
-		Grilla grilla = new Grilla();
-		Controlador controlador = new Controlador(menu, grilla);
-	}
 
 }
