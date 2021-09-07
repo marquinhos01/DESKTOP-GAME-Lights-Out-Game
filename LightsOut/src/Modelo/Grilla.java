@@ -77,7 +77,7 @@ public class Grilla {
 		boolean todosFalsos = false;
 		for (int i = 0; i < 4; i++) {
 			for (int j = 0; j < 4; j++) {
-				todosFalsos = todosFalsos && estadoCasilla(i, j) == false;
+				todosFalsos = todosFalsos || estadoCasilla(i, j);
 			}
 		}
 		return todosFalsos;

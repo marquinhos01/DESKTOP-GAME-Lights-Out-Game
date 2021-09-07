@@ -32,10 +32,9 @@ public class Controlador {
 				grilla.cambiarEstadoGrilla(filaGrilla, columnaGrilla);
 
 				
-				if (grilla.todosFalse()) { //gane!
-					ventanaJuego.getMainFrame().setVisible(false);
+				if (!grilla.todosFalse()) { //gane!
+					ventanaJuego.getMainFrame().setVisible(false);	
 				}
-				
 				
 				System.out.println(grilla.toString());
 
