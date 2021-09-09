@@ -19,6 +19,7 @@ import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
 import Modelo.Grilla;
+import controlador.IniciarJuego;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -86,13 +87,14 @@ public class VistaJuego extends Tamanios {
 		getMainFrame().getContentPane().add(panelAbajo, BorderLayout.SOUTH);
 		panelAbajo.setLayout(new GridLayout(1, 4, 30, 10));
 
-		labelPuntuacion = new JLabel("  Puntuacion:");
-		labelPuntuacion.setFont(new Font("Snap ITC", Font.PLAIN, 18));
-		labelPuntuacion.setHorizontalAlignment(SwingConstants.LEFT);
+		labelPuntuacion = new JLabel("Movimientos:");
+		labelPuntuacion.setFont(new Font("Snap ITC", Font.PLAIN, 17));
+		labelPuntuacion.setHorizontalAlignment(SwingConstants.RIGHT);
 		panelAbajo.add(labelPuntuacion);
 
-		labelpPuntuacionActualizar = new JLabel("2");
-		labelpPuntuacionActualizar.setFont(new Font("Snap ITC", Font.PLAIN, 20));
+		labelpPuntuacionActualizar = new JLabel(IniciarJuego.getStringPuntaje());
+		labelpPuntuacionActualizar.setHorizontalAlignment(SwingConstants.LEFT);
+		labelpPuntuacionActualizar.setFont(new Font("Snap ITC", Font.PLAIN, 18));
 		panelAbajo.add(labelpPuntuacionActualizar);
 
 		btnTerminar = new JButton("Terminar");
@@ -141,8 +143,11 @@ public class VistaJuego extends Tamanios {
 
 		iconoFocoPrendido = new ImageIcon(imagenFocoPrendidoEscalada);
 		iconoFocoApagado = new ImageIcon(imagenFocoApagadoEscalada);
-		
 
+	}
+	
+	public void actualizarPuntaje() {
+		labelpPuntuacionActualizar.setText(IniciarJuego.getStringPuntaje());
 	}
 
 	public void cambiarImagenesFocoPrendido(int i, int j) {

@@ -30,6 +30,9 @@ public class Controlador {
 				filaGrilla = ventanaJuego.getGrillaVista().rowAtPoint(evt.getPoint());
 				columnaGrilla = ventanaJuego.getGrillaVista().columnAtPoint(evt.getPoint());
 				grilla.cambiarEstadoGrilla(filaGrilla, columnaGrilla);
+				IniciarJuego.SumaPuntos();
+				ventanaJuego.actualizarPuntaje();
+				System.out.println(IniciarJuego.getPuntaje());
 
 				
 				if (!grilla.todosFalse()) { //gane!
