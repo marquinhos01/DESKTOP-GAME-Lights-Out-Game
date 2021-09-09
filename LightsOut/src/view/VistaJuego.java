@@ -30,6 +30,8 @@ import javax.swing.ImageIcon;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.SystemColor;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class VistaJuego extends Tamanios {
 
@@ -98,6 +100,7 @@ public class VistaJuego extends Tamanios {
 		panelAbajo.add(labelpPuntuacionActualizar);
 
 		btnTerminar = new JButton("Terminar");
+		
 		btnTerminar.setFont(new Font("Snap ITC", Font.PLAIN, 18));
 		panelAbajo.add(btnTerminar);
 
@@ -208,6 +211,9 @@ public class VistaJuego extends Tamanios {
 
 	public void show() {
 		this.mainFrame.setVisible(true);
+	}
+	public void ocultar() {
+		this.mainFrame.dispose();
 	}
 
 }
