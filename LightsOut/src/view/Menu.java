@@ -170,17 +170,4 @@ public class Menu extends Tamanios {
 		this.ventana.dispose();
 	}
 
-
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					Menu window = new Menu();
-//					window.show();
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
 }

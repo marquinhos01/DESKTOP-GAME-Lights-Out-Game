@@ -204,7 +204,6 @@ public class VistaJuego extends Tamanios {
 		return btnCambiarGrilla;
 	}
 
-
 	public JFrame getMainFrame() {
 		return mainFrame;
 	}

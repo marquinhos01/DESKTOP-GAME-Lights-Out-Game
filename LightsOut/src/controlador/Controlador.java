@@ -27,7 +27,7 @@ public class Controlador {
 		ventanaMenu.show();
 
 		ventanaMenu.getBtnJugar().addActionListener(ini -> iniciar(ini));
-		ventanaJuego.getBtnTerminar().addActionListener(x -> cerrar(x));
+		ventanaJuego.getBtnTerminar().addActionListener(r -> reiniciar(r));
 		ventanaJuego.getGrillaVista().addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mouseClicked(java.awt.event.MouseEvent evt) {
 				filaGrilla = ventanaJuego.getGrillaVista().rowAtPoint(evt.getPoint());
@@ -48,7 +48,8 @@ public class Controlador {
 				
 				// Si el jugador gana
 				if (!grilla.todosFalse()) { 
-					ventanaJuego.getMainFrame().setVisible(false);
+					JOptionPane.showMessageDialog(ventanaJuego.getMainFrame(), ventanaMenu.getCampoNombre().getText() 
+					+ " ¡Ganaste en " + IniciarJuego.getStringPuntaje() + " movimientos!");
 				}	
 			}
 			
@@ -57,12 +58,9 @@ public class Controlador {
 
 	public void iniciar(ActionEvent ini) {		
 		if (ventanaMenu.getCampoNombre().getText().equals("")) {
-			JOptionPane.showMessageDialog(ventanaMenu.getVentana(), "Complete el nombre para seguir");
+			JOptionPane.showMessageDialog(ventanaMenu.getVentana(), "Ingrese un nombre para continuar");
 		} 
 		else {
-//			nombreJugador = ventanaMenu.getCampoNombre().getText();
-//			jugadores.ingresarJugador(new Jugador(nombreJugador));
-
 			ventanaMenu.ocultar();
 			ventanaJuego.show();
 			grilla.iniciarGrilla();
@@ -79,7 +77,7 @@ public class Controlador {
 		}
 	}
 	
-	public void cerrar(ActionEvent x) {
+	public void reiniciar(ActionEvent r) {
 		ventanaJuego.ocultar();
 		ventanaMenu.setCampoNombre("");
 		ventanaMenu.show();
