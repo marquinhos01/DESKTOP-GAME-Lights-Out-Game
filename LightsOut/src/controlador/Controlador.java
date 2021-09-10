@@ -24,9 +24,11 @@ public class Controlador {
 		this.ventanaMenu = menu;
 		this.grilla = grilla;
 
-
+		//Boton Jugar - Menu
 		ventanaMenu.getBtnJugar().addActionListener(ini -> iniciar(ini));
+		//Boton Terminar - Pantalla juego
 		ventanaJuego.getBtnTerminar().addActionListener(r -> reiniciar(r));
+		//Acciones Click Mouse
 		ventanaJuego.getGrillaVista().addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mouseClicked(java.awt.event.MouseEvent evt) {
 				filaGrilla = ventanaJuego.getGrillaVista().rowAtPoint(evt.getPoint());
@@ -54,6 +56,8 @@ public class Controlador {
 			
 		});
 	}
+	
+	//METODOS
 	
 	public void inicializar() {
 		ventanaMenu.show();
@@ -84,6 +88,7 @@ public class Controlador {
 		ventanaJuego.ocultar();
 		ventanaMenu.setCampoNombre("");
 		Juego.setPuntaje(0);
+		ventanaJuego.actualizarPuntaje();
 		ventanaMenu.show();
 	}
 }

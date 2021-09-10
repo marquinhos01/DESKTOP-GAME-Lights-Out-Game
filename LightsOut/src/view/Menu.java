@@ -4,13 +4,8 @@ import java.awt.*;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
-
-import Modelo.Grilla;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 
 
@@ -51,8 +46,6 @@ public class Menu extends Tamanios {
 		ventana.setTitle("Menu");
 		ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		ventana.getContentPane().setLayout(null);
-
-
 
 
 		tituloSuperior = new JLabel("Lights Outs");

@@ -1,7 +1,5 @@
 package Modelo;
 
-import java.util.Objects;
-
 public class Juego {
 	private static int puntaje;
 	
