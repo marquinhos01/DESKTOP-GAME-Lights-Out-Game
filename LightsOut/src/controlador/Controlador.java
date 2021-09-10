@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 
 import Modelo.Grilla;
-import Modelo.Jugador;
+import Modelo.Juego;
 import view.Menu;
 import view.VistaJuego;
 
@@ -24,7 +24,6 @@ public class Controlador {
 		this.ventanaMenu = menu;
 		this.grilla = grilla;
 
-		ventanaMenu.show();
 
 		ventanaMenu.getBtnJugar().addActionListener(ini -> iniciar(ini));
 		ventanaJuego.getBtnTerminar().addActionListener(r -> reiniciar(r));
@@ -33,7 +32,7 @@ public class Controlador {
 				filaGrilla = ventanaJuego.getGrillaVista().rowAtPoint(evt.getPoint());
 				columnaGrilla = ventanaJuego.getGrillaVista().columnAtPoint(evt.getPoint());
 				grilla.cambiarEstadoGrilla(filaGrilla, columnaGrilla);
-				IniciarJuego.SumaPuntos();
+				Juego.SumaPuntos();
 				ventanaJuego.actualizarPuntaje();
 				
 				//Cambia la imagen del foco segun su estado
@@ -49,11 +48,15 @@ public class Controlador {
 				// Si el jugador gana
 				if (!grilla.todosFalse()) { 
 					JOptionPane.showMessageDialog(ventanaJuego.getMainFrame(), ventanaMenu.getCampoNombre().getText() 
-					+ " ¡Ganaste en " + IniciarJuego.getStringPuntaje() + " movimientos!");
+					+ " ¡Ganaste en " + Juego.getStringPuntaje() + " movimientos!");
 				}	
 			}
 			
 		});
+	}
+	
+	public void inicializar() {
+		ventanaMenu.show();
 	}
 
 	public void iniciar(ActionEvent ini) {		
@@ -80,6 +83,7 @@ public class Controlador {
 	public void reiniciar(ActionEvent r) {
 		ventanaJuego.ocultar();
 		ventanaMenu.setCampoNombre("");
+		Juego.setPuntaje(0);
 		ventanaMenu.show();
 	}
 }

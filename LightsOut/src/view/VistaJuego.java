@@ -19,7 +19,7 @@ import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
 import Modelo.Grilla;
-import controlador.IniciarJuego;
+import Modelo.Juego;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -94,7 +94,7 @@ public class VistaJuego extends Tamanios {
 		labelPuntuacion.setHorizontalAlignment(SwingConstants.RIGHT);
 		panelAbajo.add(labelPuntuacion);
 
-		labelpPuntuacionActualizar = new JLabel(IniciarJuego.getStringPuntaje());
+		labelpPuntuacionActualizar = new JLabel(Juego.getStringPuntaje());
 		labelpPuntuacionActualizar.setHorizontalAlignment(SwingConstants.LEFT);
 		labelpPuntuacionActualizar.setFont(new Font("Snap ITC", Font.PLAIN, 18));
 		panelAbajo.add(labelpPuntuacionActualizar);
@@ -150,7 +150,7 @@ public class VistaJuego extends Tamanios {
 	}
 	
 	public void actualizarPuntaje() {
-		labelpPuntuacionActualizar.setText(IniciarJuego.getStringPuntaje());
+		labelpPuntuacionActualizar.setText(Juego.getStringPuntaje());
 	}
 
 	public void cambiarImagenesFocoPrendido(int i, int j) {
