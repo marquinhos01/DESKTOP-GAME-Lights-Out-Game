@@ -3,7 +3,8 @@ package controlador;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import Modelo.BDJugador;
+import javax.swing.JOptionPane;
+
 import Modelo.Grilla;
 import Modelo.Jugador;
 import view.Menu;
@@ -16,11 +17,8 @@ public class Controlador {
 	private Grilla grilla;
 	private int filaGrilla;
 	private int columnaGrilla;
-	private BDJugador jugadores;
-	private String nombreJugador;
 
 	public Controlador(Menu menu, Grilla grilla) {
-		this.jugadores = new BDJugador();
 		VistaJuego juego = new VistaJuego();
 		this.ventanaJuego = juego;
 		this.ventanaMenu = menu;
@@ -28,13 +26,8 @@ public class Controlador {
 
 		ventanaMenu.show();
 
-		ventanaMenu.getBtnJugar().addActionListener(e -> iniciar(e));
-		ventanaJuego.getBtnTerminar().addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				ventanaJuego.ocultar();
-				ventanaMenu.show();
-			}
-		});
+		ventanaMenu.getBtnJugar().addActionListener(ini -> iniciar(ini));
+		ventanaJuego.getBtnTerminar().addActionListener(x -> cerrar(x));
 		ventanaJuego.getGrillaVista().addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mouseClicked(java.awt.event.MouseEvent evt) {
 				filaGrilla = ventanaJuego.getGrillaVista().rowAtPoint(evt.getPoint());
@@ -42,14 +35,8 @@ public class Controlador {
 				grilla.cambiarEstadoGrilla(filaGrilla, columnaGrilla);
 				IniciarJuego.SumaPuntos();
 				ventanaJuego.actualizarPuntaje();
-				System.out.println(IniciarJuego.getPuntaje());
-
-				if (!grilla.todosFalse()) { // gane!
-					ventanaJuego.getMainFrame().setVisible(false);
-				}
-
-				System.out.println(grilla.toString());
-
+				
+				//Cambia la imagen del foco segun su estado
 				for (int i = 0; i < grilla.casillas.length; i++) {
 					for (int j = 0; j < grilla.casillas.length; j++) {
 						if (grilla.estadoCasilla(i, j)) {
@@ -58,25 +45,28 @@ public class Controlador {
 							ventanaJuego.cambiarImagenesFocoApagado(i, j);
 					}
 				}
-					
+				
+				// Si el jugador gana
+				if (!grilla.todosFalse()) { 
+					ventanaJuego.getMainFrame().setVisible(false);
+				}	
 			}
 			
 		});
 	}
 
-	public void iniciar(ActionEvent e) {
-		
+	public void iniciar(ActionEvent ini) {		
 		if (ventanaMenu.getCampoNombre().getText().equals("")) {
-			throw new RuntimeException("Complete el nombre para seguir");
+			JOptionPane.showMessageDialog(ventanaMenu.getVentana(), "Complete el nombre para seguir");
 		} 
 		else {
-			nombreJugador = ventanaMenu.getCampoNombre().getText();
-			jugadores.ingresarJugador(new Jugador(nombreJugador));
+//			nombreJugador = ventanaMenu.getCampoNombre().getText();
+//			jugadores.ingresarJugador(new Jugador(nombreJugador));
 
 			ventanaMenu.ocultar();
 			ventanaJuego.show();
 			grilla.iniciarGrilla();
-			System.out.println(grilla.toString());
+			
 			for (int i = 0; i < grilla.casillas.length; i++) {
 				for (int j = 0; j < grilla.casillas.length; j++) {
 					if (grilla.estadoCasilla(i, j) == true) {
@@ -85,10 +75,14 @@ public class Controlador {
 						ventanaJuego.cambiarImagenesFocoApagado(i, j);
 					}
 				}
-
 			}
 		}
-
+	}
+	
+	public void cerrar(ActionEvent x) {
+		ventanaJuego.ocultar();
+		ventanaMenu.setCampoNombre("");
+		ventanaMenu.show();
 	}
 }
 

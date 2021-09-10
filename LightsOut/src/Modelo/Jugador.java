@@ -28,8 +28,6 @@ public class Jugador {
 		this.puntaje = _puntaje;
 	}
 
-	
-
 	@Override
 	public String toString() {
 		return  nombre + ", " + puntaje;

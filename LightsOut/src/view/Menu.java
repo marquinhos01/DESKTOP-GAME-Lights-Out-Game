@@ -48,7 +48,7 @@ public class Menu extends Tamanios {
 		ventana.setResizable(false);
 
 		// frame.setExtendedState(6);
-		ventana.setTitle("primera tabla");
+		ventana.setTitle("Menu");
 		ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		ventana.getContentPane().setLayout(null);
 
@@ -112,8 +112,8 @@ public class Menu extends Tamanios {
 		return campoNombre;
 	}
 
-	public void setCampoNombre(JTextField campoNombre) {
-		this.campoNombre = campoNombre;
+	public void setCampoNombre(String campoNombre) {
+		this.campoNombre.setText(campoNombre);
 	}
 
 	public JLabel getTituloSuperior() {
