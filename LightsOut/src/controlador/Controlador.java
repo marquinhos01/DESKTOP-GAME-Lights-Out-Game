@@ -38,8 +38,8 @@ public class Controlador {
 				ventanaJuego.actualizarPuntaje();
 				
 				//Cambia la imagen del foco segun su estado
-				for (int i = 0; i < grilla.casillas.length; i++) {
-					for (int j = 0; j < grilla.casillas.length; j++) {
+				for (int i = 0; i < grilla.longitud(); i++) {
+					for (int j = 0; j < grilla.longitud(); j++) {
 						if (grilla.estadoCasilla(i, j)) {
 							ventanaJuego.cambiarImagenesFocoPrendido(i, j);
 						} else
@@ -72,8 +72,8 @@ public class Controlador {
 			ventanaJuego.show();
 			grilla.iniciarGrilla();
 			
-			for (int i = 0; i < grilla.casillas.length; i++) {
-				for (int j = 0; j < grilla.casillas.length; j++) {
+			for (int i = 0; i < grilla.longitud(); i++) {
+				for (int j = 0; j < grilla.longitud(); j++) {
 					if (grilla.estadoCasilla(i, j) == true) {
 						ventanaJuego.cambiarImagenesFocoPrendido(i, j);
 					} else {

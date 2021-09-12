@@ -137,7 +137,9 @@ public class VistaJuego extends Tamanios {
 		labelImagenFocoPrendido = new JLabel(); // aca meto las imagenes
 
 		Image imagenFocoPrendido = new ImageIcon(getClass().getResource("/focoPrendido.png")).getImage();
+//		Image imagenFocoPrendido = new ImageIcon("C:\\Users\\Romina\\git\\trabajo_practico_progra\\lightsout\\LightsOut\\images\\focoPrendido.png").getImage();
 		Image imagenFocoApagado = new ImageIcon(getClass().getResource("/focoApagado.png")).getImage();
+//		Image imagenFocoApagado = new ImageIcon("C:\\Users\\Romina\\git\\trabajo_practico_progra\\lightsout\\LightsOut\\images\\focoApagado.png").getImage();
 
 		Image imagenFocoPrendidoEscalada = imagenFocoPrendido.getScaledInstance(super.getAnchoFrame(mainFrame) / 4,
 				grillaVista.getRowHeight(), java.awt.Image.SCALE_SMOOTH);

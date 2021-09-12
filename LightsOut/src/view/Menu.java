@@ -80,6 +80,7 @@ public class Menu extends Tamanios {
 
 		labelImagenFondo = new JLabel("");
 		imgMenu = new ImageIcon(this.getClass().getResource("/fondoMenu.png"));
+//		imgMenu = new ImageIcon("C:\\Users\\Romina\\git\\trabajo_practico_progra\\lightsout\\LightsOut\\images\\fondoMenu.png");
 		labelImagenFondo.setIcon(imgMenu);
 		labelImagenFondo.setBounds(0, 0, super.getAnchoFrame(ventana), super.getAltoFrame(ventana));
 		ventana.getContentPane().add(labelImagenFondo);

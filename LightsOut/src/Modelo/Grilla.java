@@ -3,7 +3,7 @@ package Modelo;
 import java.util.ArrayList;
 
 public class Grilla {
-	public Boolean[][] casillas;
+	private Boolean[][] casillas;
 
 	public Grilla() {
 		this.casillas = new Boolean[4][4];
@@ -28,7 +28,7 @@ public class Grilla {
 			int j = this.indiceAleatorio();
 			if (!indices.contains(i + "" + j)) {
 				this.casillas[i][j] = true;
-				indices.add(i + "" + j);
+				indices.add(i + "" + j); //se van guardando las posiciones
 				k++;
 			}
 		}
@@ -81,6 +81,10 @@ public class Grilla {
 			}
 		}
 		return todosFalsos;
+	}
+	
+	public int longitud() {
+		return this.casillas.length;
 	}
 
 }
