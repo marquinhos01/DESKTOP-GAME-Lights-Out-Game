@@ -2,19 +2,19 @@ package Modelo;
 
 public class Juego {
 	private static int puntaje;
-	
+
 	public Juego(String nombre) {
-		puntaje=0;
-		
+		puntaje = 0;
+
 	}
-	
+
 	public static int SumaPuntos() {
-		return puntaje ++;
+		return puntaje++;
 	}
 
 	public static int getPuntaje() {
 		return puntaje;
-	}	
+	}
 
 	public static void setPuntaje(int puntaje) {
 		Juego.puntaje = puntaje;
@@ -25,5 +25,5 @@ public class Juego {
 		puntos.append(puntaje);
 		return puntos.toString();
 	}
-	
+
 }

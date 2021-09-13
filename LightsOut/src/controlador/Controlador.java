@@ -1,11 +1,15 @@
 package controlador;
 
 import java.awt.event.ActionEvent;
+import java.io.FileInputStream;
+
 
 import javax.swing.JOptionPane;
 
 import Modelo.Grilla;
 import Modelo.Juego;
+import javazoom.jl.decoder.JavaLayerException;
+import javazoom.jl.player.Player;
 import view.Menu;
 import view.VistaJuego;
 
@@ -16,18 +20,21 @@ public class Controlador {
 	private Grilla grilla;
 	private int filaGrilla;
 	private int columnaGrilla;
+	private FileInputStream sondioTocar;
+	private Player sonidoToque;
 
 	public Controlador(Menu menu, Grilla grilla) {
+
 		VistaJuego juego = new VistaJuego();
 		this.ventanaJuego = juego;
 		this.ventanaMenu = menu;
 		this.grilla = grilla;
 
-		//Boton Jugar - Menu
+		// Boton Jugar - Menu
 		ventanaMenu.getBtnJugar().addActionListener(ini -> iniciar(ini));
-		//Boton Terminar - Pantalla juego
+		// Boton Terminar - Pantalla juego
 		ventanaJuego.getBtnTerminar().addActionListener(r -> reiniciar(r));
-		//Acciones Click Mouse
+		// Acciones Click Mouse
 		ventanaJuego.getBtnCambiarGrilla().addActionListener(camb -> reiniciarGrilla(camb));
 		ventanaJuego.getGrillaVista().addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -36,8 +43,8 @@ public class Controlador {
 				grilla.cambiarEstadoGrilla(filaGrilla, columnaGrilla);
 				Juego.SumaPuntos();
 				ventanaJuego.actualizarPuntaje();
-				
-				//Cambia la imagen del foco segun su estado
+
+				// Cambia la imagen del foco segun su estado
 				for (int i = 0; i < grilla.longitud(); i++) {
 					for (int j = 0; j < grilla.longitud(); j++) {
 						if (grilla.estadoCasilla(i, j)) {
@@ -46,20 +53,22 @@ public class Controlador {
 							ventanaJuego.cambiarImagenesFocoApagado(i, j);
 					}
 				}
-				
+
+				// sonido
+				sonido("focoSoundx");
+
 				// Si el jugador gana
-				if (!grilla.todosFalse()) { 
-					JOptionPane.showMessageDialog(ventanaJuego.getMainFrame(), ventanaMenu.getCampoNombre().getText() 
-					+ " ¡Ganaste en " + Juego.getStringPuntaje() + " movimientos!");
-				}	
+				if (!grilla.todosFalse()) {
+					JOptionPane.showMessageDialog(ventanaJuego.getMainFrame(), ventanaMenu.getCampoNombre().getText()
+							+ " ¡Ganaste en " + Juego.getStringPuntaje() + " movimientos!");
+				}
 			}
-			
+
 		});
-		
+
 	}
-	
-	//METODOS
-	
+
+	// METODOS
 	public void inicializar() {
 		ventanaMenu.show();
 	}
@@ -67,38 +76,49 @@ public class Controlador {
 	public void iniciar(ActionEvent ini) {
 		Juego.setPuntaje(0);
 		ventanaJuego.actualizarPuntaje();
-		if (ventanaMenu.getCampoNombre().getText().equals("")) {
+		if (ventanaMenu.getCampoNombre().getText().equals(""))
 			JOptionPane.showMessageDialog(ventanaMenu.getVentana(), "Ingrese un nombre para continuar");
-		} 
 		else {
 			ventanaMenu.ocultar();
 			ventanaJuego.show();
 			reiniciarGrilla(ini);
 		}
+
 	}
-	
+
 	public void reiniciar(ActionEvent r) {
 		ventanaJuego.ocultar();
 		ventanaMenu.setCampoNombre("");
 		ventanaJuego.actualizarPuntaje();
-		JOptionPane.showMessageDialog(ventanaJuego.getMainFrame(), ventanaMenu.getCampoNombre().getText() 
+		JOptionPane.showMessageDialog(ventanaJuego.getMainFrame(), ventanaMenu.getCampoNombre().getText()
 				+ " ¡No lo terminaste, pero hiciste: " + Juego.getStringPuntaje() + " movimientos!");
 		Juego.setPuntaje(0);
 		ventanaMenu.show();
-		
 	}
+
 	public void reiniciarGrilla(ActionEvent camb) {
 		grilla.iniciarGrilla();
 		for (int i = 0; i < grilla.longitud(); i++) {
-			for (int j = 0; j < grilla.longitud(); j++) {
-				if (grilla.estadoCasilla(i, j) == true) {
+			for (int j = 0; j < grilla.longitud(); j++)
+				if (grilla.estadoCasilla(i, j) == true)
 					ventanaJuego.cambiarImagenesFocoPrendido(i, j);
-				} else {
+				else
 					ventanaJuego.cambiarImagenesFocoApagado(i, j);
-				}
-			}
 		}
 	}
-	
-}
 
+	private void sonido(String sonido) {
+		try {
+			sondioTocar = new FileInputStream("music/" + sonido + ".mp3");
+			sonidoToque = new Player(sondioTocar);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		try {
+			sonidoToque.play();
+		} catch (JavaLayerException e) {
+			e.printStackTrace();
+		}
+	}
+
+}

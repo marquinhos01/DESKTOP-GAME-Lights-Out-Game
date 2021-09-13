@@ -48,7 +48,7 @@ public class Grilla {
 		}
 	}
 
-	// si la luz está encendida, se apaga... si está apagada, se enciende
+	// si la luz está encendida, se apaga...si está apagada, se enciende
 	private void cambiarEstadoCasilla(int i, int j) {
 		if (this.casillas[i][j]) {
 			this.casillas[i][j] = false;

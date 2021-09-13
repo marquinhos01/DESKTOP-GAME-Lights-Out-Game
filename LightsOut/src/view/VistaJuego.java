@@ -1,6 +1,5 @@
 package view;
 
-import java.awt.EventQueue;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -8,17 +7,12 @@ import java.awt.Toolkit;
 import javax.swing.JFrame;
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
-import javax.swing.table.TableColumnModel;
 
-import Modelo.Grilla;
 import Modelo.Juego;
 
 import javax.swing.JButton;
@@ -27,13 +21,8 @@ import javax.swing.JPanel;
 
 import java.awt.Font;
 import javax.swing.ImageIcon;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.awt.SystemColor;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 import java.awt.Cursor;
-import javax.swing.border.BevelBorder;
 import javax.swing.border.EtchedBorder;
 import java.awt.Rectangle;
 
@@ -52,19 +41,6 @@ public class VistaJuego extends Tamanios {
 	private ImageIcon iconoFocoPrendido;
 	private ImageIcon iconoFocoApagado;
 	private JLabel labelImagenFocoPrendido;
-
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					VistaJuego window = new VistaJuego();
-					window.getMainFrame().setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	public VistaJuego() {
 		super();
@@ -152,9 +128,7 @@ public class VistaJuego extends Tamanios {
 		labelImagenFocoPrendido = new JLabel(); // aca meto las imagenes
 
 		Image imagenFocoPrendido = new ImageIcon(getClass().getResource("/focoPrendido.png")).getImage();
-//		Image imagenFocoPrendido = new ImageIcon("C:\\Users\\Romina\\git\\trabajo_practico_progra\\lightsout\\LightsOut\\images\\focoPrendido.png").getImage();
 		Image imagenFocoApagado = new ImageIcon(getClass().getResource("/focoApagado.png")).getImage();
-//		Image imagenFocoApagado = new ImageIcon("C:\\Users\\Romina\\git\\trabajo_practico_progra\\lightsout\\LightsOut\\images\\focoApagado.png").getImage();
 
 		Image imagenFocoPrendidoEscalada = imagenFocoPrendido.getScaledInstance(super.getAnchoFrame(mainFrame) / 4,
 				grillaVista.getRowHeight(), java.awt.Image.SCALE_SMOOTH);
@@ -180,21 +154,17 @@ public class VistaJuego extends Tamanios {
 		grillaVista.setValueAt(labelImagenFocoApagado, i, j);
 	}
 
-
 	public ImageIcon getIconoFocoPrendido() {
 		return iconoFocoPrendido;
 	}
-
 
 	public ImageIcon getIconoFocoApagado() {
 		return iconoFocoApagado;
 	}
 
-
 	public JTable getGrillaVista() {
 		return grillaVista;
 	}
-
 
 	public JLabel getLabelPuntuacion() {
 		return labelPuntuacion;
@@ -216,7 +186,6 @@ public class VistaJuego extends Tamanios {
 		return btnTerminar;
 	}
 
-
 	public JButton getBtnCambiarGrilla() {
 		return btnCambiarGrilla;
 	}
@@ -228,7 +197,8 @@ public class VistaJuego extends Tamanios {
 	public void show() {
 		this.mainFrame.setVisible(true);
 	}
-	public void ocultar() {
+	
+    public void ocultar() {
 		this.mainFrame.dispose();
 	}
 
