@@ -16,8 +16,6 @@ public class Menu extends Tamanios {
 	private JTextField campoNombre;
 	private JLabel tituloSuperior;
 	private JButton btnJugar;
-	private JButton btnVerRecord;
-	private JButton btnCambiarMusica;
 	private JLabel labelImagenFondo;
 	private ImageIcon imgMenu;
 
@@ -34,15 +32,11 @@ public class Menu extends Tamanios {
 		 
 		int anchoPantallaPC = tamanoPantalla.width;
 		int alto = tamanoPantalla.height;
-//		
-//		ventana.setBounds(100, 100, 650, 700);
-		ventana.setSize(tamanoPantalla);
+
 		ventana.setBounds(anchoPantallaPC/4, 0, anchoPantallaPC/2, alto - 50);
-	//	frame.setUndecorated(true);
-		
+
 		ventana.setResizable(false);
 
-		// frame.setExtendedState(6);
 		ventana.setTitle("Menu");
 		ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		ventana.getContentPane().setLayout(null);
@@ -59,24 +53,15 @@ public class Menu extends Tamanios {
 		ventana.getContentPane().add(tituloSuperior);
 
 		btnJugar = new JButton("JUGAR");
+		btnJugar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnJugar.setBackground(Color.LIGHT_GRAY);
 
 		btnJugar.setFont(new Font("Snap ITC", Font.PLAIN, 24));
-		btnJugar.setBounds(centrarObjetoHorizontal(ventana), 360, getAnchoObjeto(ventana), 62);
+		btnJugar.setBounds(ventana.getWidth()/4, 360, ventana.getWidth()/2, 62);
 
 		ventana.getContentPane().add(btnJugar);
 
-		btnVerRecord = new JButton("MAXIMO RECORD");
-		btnVerRecord.setBackground(Color.LIGHT_GRAY);
-		btnVerRecord.setFont(new Font("Snap ITC", Font.PLAIN, 23));
-		btnVerRecord.setBounds(super.centrarObjetoHorizontal(ventana), 445, super.getAnchoObjeto(ventana), 54);
-		ventana.getContentPane().add(btnVerRecord);
-
-		btnCambiarMusica = new JButton("CAMBIAR MUSICA");
-		btnCambiarMusica.setBackground(Color.LIGHT_GRAY);
-		btnCambiarMusica.setFont(new Font("Snap ITC", Font.PLAIN, 23));
-		btnCambiarMusica.setBounds(super.centrarObjetoHorizontal(ventana), 526, super.getAnchoObjeto(ventana), 54);
-		ventana.getContentPane().add(btnCambiarMusica);
+		
 
 		labelImagenFondo = new JLabel("");
 		imgMenu = new ImageIcon(this.getClass().getResource("/fondoMenu.png"));
@@ -86,8 +71,9 @@ public class Menu extends Tamanios {
 		ventana.getContentPane().add(labelImagenFondo);
 
 		campoNombre = new JTextField();
+		campoNombre.setFont(new Font("Stencil", Font.PLAIN, 20));
 		campoNombre.setHorizontalAlignment(SwingConstants.CENTER);
-		campoNombre.setBounds(super.centrarObjetoHorizontal(ventana), 172, super.getAnchoObjeto(ventana), 42);
+		campoNombre.setBounds(ventana.getWidth()/4, 172, ventana.getWidth()/2, 42);
 		ventana.getContentPane().add(campoNombre);
 		campoNombre.setColumns(10);
 
@@ -126,21 +112,6 @@ public class Menu extends Tamanios {
 		this.btnJugar = btnJugar;
 	}
 
-	public JButton getBtnVerRecord() {
-		return btnVerRecord;
-	}
-
-	public void setBtnVerRecord(JButton btnVerRecord) {
-		this.btnVerRecord = btnVerRecord;
-	}
-
-	public JButton getBtnCambiarMusica() {
-		return btnCambiarMusica;
-	}
-
-	public void setBtnCambiarMusica(JButton btnCambiarMusica) {
-		this.btnCambiarMusica = btnCambiarMusica;
-	}
 
 	public JLabel getLabelImagenFondo() {
 		return labelImagenFondo;

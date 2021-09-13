@@ -32,6 +32,10 @@ import java.awt.event.MouseEvent;
 import java.awt.SystemColor;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Cursor;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.EtchedBorder;
+import java.awt.Rectangle;
 
 public class VistaJuego extends Tamanios {
 
@@ -85,6 +89,8 @@ public class VistaJuego extends Tamanios {
 		getMainFrame().getContentPane().setLayout(new BorderLayout(20, 40));
 
 		panelAbajo = new JPanel();
+		panelAbajo.setBounds(new Rectangle(0, 0, 0, 200));
+		panelAbajo.setForeground(Color.BLUE);
 		panelAbajo.setBackground(SystemColor.textHighlight);
 		getMainFrame().getContentPane().add(panelAbajo, BorderLayout.SOUTH);
 		panelAbajo.setLayout(new GridLayout(1, 4, 30, 10));
@@ -100,11 +106,20 @@ public class VistaJuego extends Tamanios {
 		panelAbajo.add(labelpPuntuacionActualizar);
 
 		btnTerminar = new JButton("Terminar");
+		btnTerminar.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		btnTerminar.setPreferredSize(new Dimension(75, 40));
+		btnTerminar.setBackground(Color.WHITE);
+		btnTerminar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		
 		btnTerminar.setFont(new Font("Snap ITC", Font.PLAIN, 18));
 		panelAbajo.add(btnTerminar);
 
 		btnCambiarGrilla = new JButton("Cambiar");
+	
+		btnCambiarGrilla.setBackground(Color.WHITE);
+		btnCambiarGrilla.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		btnCambiarGrilla.setPreferredSize(new Dimension(71, 40));
+		btnCambiarGrilla.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnCambiarGrilla.setFont(new Font("Snap ITC", Font.PLAIN, 18));
 		panelAbajo.add(btnCambiarGrilla);
 
