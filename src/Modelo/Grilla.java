@@ -35,13 +35,13 @@ public class Grilla {
 	}
 
 	public void cambiarEstadoGrilla(int i, int j) {
-		if (i >= 0 | i < 4 | j >= 0 | j < 4) {
+		if (i >= 0 | i < casillas.length | j >= 0 | j < casillas.length) {
 			this.cambiarEstadoCasilla(i, j);
-			if (i < 3)
+			if (i < casillas.length-1)
 				this.cambiarEstadoCasilla(i + 1, j);
 			if (i > 0)
 				this.cambiarEstadoCasilla(i - 1, j);
-			if (j < 3)
+			if (j < casillas.length-1)
 				this.cambiarEstadoCasilla(i, j + 1);
 			if (j > 0)
 				this.cambiarEstadoCasilla(i, j - 1);
@@ -60,18 +60,6 @@ public class Grilla {
 
 	public boolean estadoCasilla(int i, int j) {
 		return this.casillas[i][j];
-	}
-
-	@Override
-	public String toString() {
-		StringBuilder sb = new StringBuilder();
-		for (int i = 0; i < casillas.length; i++) {
-			for (int j = 0; j < casillas[i].length; j++) {
-				sb.append(casillas[i][j] + "   ");
-			}
-			sb.append("\n\n");
-		}
-		return sb.toString();
 	}
 
 	public boolean todosFalse() {

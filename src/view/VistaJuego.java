@@ -146,10 +146,6 @@ public class VistaJuego extends Tamanios {
 		model.setRowCount(i);
 	}
 	
-	public void reescalarImagen(Image imagen, int Colum) {
-		
-	}
-	
 	public void actualizarPuntaje(Juego j) {
 		labelpPuntuacionActualizar.setText(j.getStringPuntaje());
 	}

@@ -41,6 +41,7 @@ public class Controlador {
 		ventanaJuego.getBtnCambiarGrilla().addActionListener(camb -> reiniciarGrilla(camb));
 		ventanaJuego.getGrillaVista().addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mouseClicked(java.awt.event.MouseEvent evt) {
+				//filGrilla = i de la grilla, culumnaGrilla = j de la grilla
 				filaGrilla = ventanaJuego.getGrillaVista().rowAtPoint(evt.getPoint());
 				columnaGrilla = ventanaJuego.getGrillaVista().columnAtPoint(evt.getPoint());
 				juego.getGrilla().cambiarEstadoGrilla(filaGrilla, columnaGrilla);
