@@ -55,20 +55,20 @@ public class VistaJuego extends Tamanios {
 		int anchoPantallaPC = tamanoPantalla.width;
 		int alto = tamanoPantalla.height;
 		mainFrame = new JFrame();
-		mainFrame.getContentPane().setBackground(SystemColor.activeCaption);
+		mainFrame.getContentPane().setBackground(new Color(204, 255, 255));
 
 		getMainFrame().setBackground(Color.BLACK);
 
 		getMainFrame().setBounds(anchoPantallaPC / 4, 0, anchoPantallaPC / 2, alto - 50);
 
 		getMainFrame().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		getMainFrame().getContentPane().setLayout(new BorderLayout(20, 40));
+		mainFrame.getContentPane().setLayout(null);
 
 		panelAbajo = new JPanel();
-		panelAbajo.setBounds(new Rectangle(0, 0, 0, 200));
+		panelAbajo.setBounds(new Rectangle(0, 639, 667, 40));
 		panelAbajo.setForeground(Color.BLUE);
-		panelAbajo.setBackground(SystemColor.textHighlight);
-		getMainFrame().getContentPane().add(panelAbajo, BorderLayout.SOUTH);
+		panelAbajo.setBackground(new Color(0, 153, 153));
+		getMainFrame().getContentPane().add(panelAbajo);
 		panelAbajo.setLayout(new GridLayout(1, 4, 30, 10));
 
 		labelPuntuacion = new JLabel("Movimientos:");
@@ -76,7 +76,7 @@ public class VistaJuego extends Tamanios {
 		labelPuntuacion.setHorizontalAlignment(SwingConstants.RIGHT);
 		panelAbajo.add(labelPuntuacion);
 
-		labelpPuntuacionActualizar = new JLabel(Juego.getStringPuntaje());
+		labelpPuntuacionActualizar = new JLabel("0");
 		labelpPuntuacionActualizar.setHorizontalAlignment(SwingConstants.LEFT);
 		labelpPuntuacionActualizar.setFont(new Font("Snap ITC", Font.PLAIN, 18));
 		panelAbajo.add(labelpPuntuacionActualizar);
@@ -100,11 +100,12 @@ public class VistaJuego extends Tamanios {
 		panelAbajo.add(btnCambiarGrilla);
 
 		labelTitulo = new JLabel("Lights Outs");
+		labelTitulo.setBounds(0, 25, 667, 45);
 		labelTitulo.setHorizontalAlignment(SwingConstants.CENTER);
 		labelTitulo.setFont(new Font("Snap ITC", Font.PLAIN, 34));
-		getMainFrame().getContentPane().add(labelTitulo, BorderLayout.NORTH);
+		getMainFrame().getContentPane().add(labelTitulo);
 
-		grillaVista = new JTable(4, 4) { // evita que se editen las celdas al tocar click
+		grillaVista = new JTable() { // evita que se editen las celdas al tocar click
 			private static final long serialVersionUID = 1L;
 
 			public boolean isCellEditable(int row, int column) {
@@ -113,13 +114,12 @@ public class VistaJuego extends Tamanios {
 			}
 
 		};
-
-		grillaVista.setBackground(Color.WHITE);
-		grillaVista.setCellSelectionEnabled(true);
+		grillaVista.setBounds(8, 93, 650, 480);
+		grillaVista.setBackground(new Color(0, 153, 153));
 		grillaVista.setRowHeight(120);
 		grillaVista.setFont(new Font("Tahoma", Font.PLAIN, 54));
 
-		mainFrame.getContentPane().add(grillaVista, BorderLayout.CENTER);
+		mainFrame.getContentPane().add(grillaVista);
 
 		model = (DefaultTableModel) grillaVista.getModel();
 		grillaVista.setDefaultRenderer(Object.class, new RenderizadorImg());
@@ -130,9 +130,9 @@ public class VistaJuego extends Tamanios {
 		Image imagenFocoPrendido = new ImageIcon(getClass().getResource("/focoPrendido.png")).getImage();
 		Image imagenFocoApagado = new ImageIcon(getClass().getResource("/focoApagado.png")).getImage();
 
-		Image imagenFocoPrendidoEscalada = imagenFocoPrendido.getScaledInstance(super.getAnchoFrame(mainFrame) / 4,
+		Image imagenFocoPrendidoEscalada = imagenFocoPrendido.getScaledInstance(super.getAnchoFrame(mainFrame) /5,
 				grillaVista.getRowHeight(), java.awt.Image.SCALE_SMOOTH);
-		Image imagenFocoApagadoEscalada = imagenFocoApagado.getScaledInstance(super.getAnchoFrame(mainFrame) / 4,
+		Image imagenFocoApagadoEscalada = imagenFocoApagado.getScaledInstance(super.getAnchoFrame(mainFrame) / 5,
 				grillaVista.getRowHeight(), java.awt.Image.SCALE_SMOOTH);
 
 		iconoFocoPrendido = new ImageIcon(imagenFocoPrendidoEscalada);
@@ -140,8 +140,18 @@ public class VistaJuego extends Tamanios {
 
 	}
 	
-	public void actualizarPuntaje() {
-		labelpPuntuacionActualizar.setText(Juego.getStringPuntaje());
+	public void tamanioGrilla(int i) {
+		grillaVista.setRowHeight(480/i);
+		model.setColumnCount(i);
+		model.setRowCount(i);
+	}
+	
+	public void reescalarImagen(Image imagen, int Colum) {
+		
+	}
+	
+	public void actualizarPuntaje(Juego j) {
+		labelpPuntuacionActualizar.setText(j.getStringPuntaje());
 	}
 
 	public void cambiarImagenesFocoPrendido(int i, int j) {

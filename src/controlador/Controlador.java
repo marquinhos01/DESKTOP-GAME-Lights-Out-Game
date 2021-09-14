@@ -2,36 +2,39 @@ package controlador;
 
 import java.awt.event.ActionEvent;
 import java.io.FileInputStream;
-
-
 import javax.swing.JOptionPane;
-
-import Modelo.Grilla;
-import Modelo.Juego;
 import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.Player;
+
+import Modelo.Juego;
 import view.Menu;
+import view.VentanaDificultad;
 import view.VistaJuego;
 
 public class Controlador {
 
 	private Menu ventanaMenu;
+	private VentanaDificultad ventanaDif;
 	private VistaJuego ventanaJuego;
-	private Grilla grilla;
+	private Juego juego;
 	private int filaGrilla;
 	private int columnaGrilla;
 	private FileInputStream sondioTocar;
 	private Player sonidoToque;
 
-	public Controlador(Menu menu, Grilla grilla) {
+	public Controlador(Menu menu, Juego juego) {
 
-		VistaJuego juego = new VistaJuego();
-		this.ventanaJuego = juego;
+		VentanaDificultad dialogo = new VentanaDificultad();
+		VistaJuego ventana = new VistaJuego();
+		this.ventanaDif=dialogo;
+		this.ventanaJuego = ventana;
 		this.ventanaMenu = menu;
-		this.grilla = grilla;
+		this.juego = juego;
 
 		// Boton Jugar - Menu
 		ventanaMenu.getBtnJugar().addActionListener(ini -> iniciar(ini));
+		ventanaDif.getBtnNormal().addActionListener(n -> juegoNormal(n));
+		ventanaDif.getBtnDificil().addActionListener(d -> juegoDificil(d));
 		// Boton Terminar - Pantalla juego
 		ventanaJuego.getBtnTerminar().addActionListener(r -> reiniciar(r));
 		// Acciones Click Mouse
@@ -40,14 +43,14 @@ public class Controlador {
 			public void mouseClicked(java.awt.event.MouseEvent evt) {
 				filaGrilla = ventanaJuego.getGrillaVista().rowAtPoint(evt.getPoint());
 				columnaGrilla = ventanaJuego.getGrillaVista().columnAtPoint(evt.getPoint());
-				grilla.cambiarEstadoGrilla(filaGrilla, columnaGrilla);
-				Juego.SumaPuntos();
-				ventanaJuego.actualizarPuntaje();
-
+				juego.getGrilla().cambiarEstadoGrilla(filaGrilla, columnaGrilla);
+				juego.SumaPuntos();
+				ventanaJuego.actualizarPuntaje(juego);
+				
 				// Cambia la imagen del foco segun su estado
-				for (int i = 0; i < grilla.longitud(); i++) {
-					for (int j = 0; j < grilla.longitud(); j++) {
-						if (grilla.estadoCasilla(i, j)) {
+				for (int i = 0; i < juego.getGrilla().longitud() ; i++) {
+					for (int j = 0; j < juego.getGrilla().longitud(); j++) {
+						if (juego.getGrilla().estadoCasilla(i, j)) {
 							ventanaJuego.cambiarImagenesFocoPrendido(i, j);
 						} else
 							ventanaJuego.cambiarImagenesFocoApagado(i, j);
@@ -58,9 +61,9 @@ public class Controlador {
 				sonido("focoSoundx");
 
 				// Si el jugador gana
-				if (!grilla.todosFalse()) {
+				if (!juego.getGrilla().todosFalse()) {
 					JOptionPane.showMessageDialog(ventanaJuego.getMainFrame(), ventanaMenu.getCampoNombre().getText()
-							+ " ¡Ganaste en " + Juego.getStringPuntaje() + " movimientos!");
+							+ " ¡Ganaste en " + juego.getStringPuntaje() + " movimientos!");
 				}
 			}
 
@@ -74,33 +77,66 @@ public class Controlador {
 	}
 
 	public void iniciar(ActionEvent ini) {
-		Juego.setPuntaje(0);
-		ventanaJuego.actualizarPuntaje();
+		juego.setPuntaje(0);
+		ventanaJuego.actualizarPuntaje(juego);
 		if (ventanaMenu.getCampoNombre().getText().equals(""))
 			JOptionPane.showMessageDialog(ventanaMenu.getVentana(), "Ingrese un nombre para continuar");
 		else {
 			ventanaMenu.ocultar();
-			ventanaJuego.show();
-			reiniciarGrilla(ini);
+			ventanaDif.show();
 		}
-
 	}
+
+	public void juegoNormal(ActionEvent n) {
+		ventanaDif.ocultar();
+		ventanaJuego.show();
+		juego.crearGrilla(4);		
+		juego.getGrilla().iniciarGrilla();
+		ventanaJuego.tamanioGrilla(4);
+		for (int i = 0; i < juego.getGrilla().longitud(); i++) {
+			for (int j = 0; j < juego.getGrilla().longitud(); j++) {
+				if (juego.getGrilla().estadoCasilla(i, j) == true) {
+					ventanaJuego.cambiarImagenesFocoPrendido(i, j);
+				} else {
+					ventanaJuego.cambiarImagenesFocoApagado(i, j);
+				}
+			}
+		}
+	}	
+	
+	public void juegoDificil(ActionEvent d) {
+		ventanaDif.ocultar();
+		ventanaJuego.show();
+		juego.crearGrilla(5);		
+		juego.getGrilla().iniciarGrilla();
+		ventanaJuego.tamanioGrilla(5);
+		for (int i = 0; i < juego.getGrilla().longitud(); i++) {
+			for (int j = 0; j < juego.getGrilla().longitud(); j++) {
+				if (juego.getGrilla().estadoCasilla(i, j) == true) {
+					ventanaJuego.cambiarImagenesFocoPrendido(i, j);
+				} else {
+					ventanaJuego.cambiarImagenesFocoApagado(i, j);
+				}
+			}
+		}
+	}
+
 
 	public void reiniciar(ActionEvent r) {
 		ventanaJuego.ocultar();
 		ventanaMenu.setCampoNombre("");
-		ventanaJuego.actualizarPuntaje();
+		ventanaJuego.actualizarPuntaje(juego);
 		JOptionPane.showMessageDialog(ventanaJuego.getMainFrame(), ventanaMenu.getCampoNombre().getText()
-				+ " ¡No lo terminaste, pero hiciste: " + Juego.getStringPuntaje() + " movimientos!");
-		Juego.setPuntaje(0);
+				+ " ¡No lo terminaste, pero hiciste: " + juego.getStringPuntaje() + " movimientos!");
+		juego.setPuntaje(0);
 		ventanaMenu.show();
 	}
 
 	public void reiniciarGrilla(ActionEvent camb) {
-		grilla.iniciarGrilla();
-		for (int i = 0; i < grilla.longitud(); i++) {
-			for (int j = 0; j < grilla.longitud(); j++)
-				if (grilla.estadoCasilla(i, j) == true)
+		juego.getGrilla().iniciarGrilla();
+		for (int i = 0; i < juego.getGrilla().longitud(); i++) {
+			for (int j = 0; j < juego.getGrilla().longitud(); j++)
+				if (juego.getGrilla().estadoCasilla(i, j) == true)
 					ventanaJuego.cambiarImagenesFocoPrendido(i, j);
 				else
 					ventanaJuego.cambiarImagenesFocoApagado(i, j);
