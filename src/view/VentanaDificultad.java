@@ -82,9 +82,9 @@ public class VentanaDificultad extends JFrame {
 		ventanaDif.getContentPane().add(btnNormal);
 		
 		//Boton dificultad facil
-		btnFacil = new JButton("Facil");
+		btnFacil = new JButton("ParaFer");
 		btnFacil.setPreferredSize(new Dimension(75, 25));
-		btnFacil.setFont(new Font("Snap ITC", Font.PLAIN, 14));
+		btnFacil.setFont(new Font("Snap ITC", Font.PLAIN, 12));
 		btnFacil.setBackground(new Color(255, 255, 255));
 		btnFacil.setBounds(117, 78, 100, 30);
 		ventanaDif.getContentPane().add(btnFacil);

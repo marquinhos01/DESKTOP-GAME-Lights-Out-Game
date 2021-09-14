@@ -35,7 +35,7 @@ public class Controlador {
 		ventanaMenu.getBtnJugar().addActionListener(ini -> iniciar(ini));
 		ventanaDif.getBtnNormal().addActionListener(n -> juegoNormal(n));
 		ventanaDif.getBtnDificil().addActionListener(d -> juegoDificil(d));
-		ventanaDif.getBtnFacil().addActionListener(f -> juegoFacil(f));
+		ventanaDif.getBtnFacil().addActionListener(f -> juegoFacil(f)); //Nivel de prueba para ver la pantalla de victoria
 		// Boton Terminar - Pantalla juego
 		ventanaJuego.getBtnTerminar().addActionListener(r -> reiniciar(r));
 		// Acciones Click Mouse
