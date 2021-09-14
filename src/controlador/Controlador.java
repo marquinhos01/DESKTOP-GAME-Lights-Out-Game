@@ -35,6 +35,7 @@ public class Controlador {
 		ventanaMenu.getBtnJugar().addActionListener(ini -> iniciar(ini));
 		ventanaDif.getBtnNormal().addActionListener(n -> juegoNormal(n));
 		ventanaDif.getBtnDificil().addActionListener(d -> juegoDificil(d));
+		ventanaDif.getBtnFacil().addActionListener(f -> juegoFacil(f));
 		// Boton Terminar - Pantalla juego
 		ventanaJuego.getBtnTerminar().addActionListener(r -> reiniciar(r));
 		// Acciones Click Mouse
@@ -111,6 +112,23 @@ public class Controlador {
 		juego.crearGrilla(5);		
 		juego.getGrilla().iniciarGrilla();
 		ventanaJuego.tamanioGrilla(5);
+		for (int i = 0; i < juego.getGrilla().longitud(); i++) {
+			for (int j = 0; j < juego.getGrilla().longitud(); j++) {
+				if (juego.getGrilla().estadoCasilla(i, j) == true) {
+					ventanaJuego.cambiarImagenesFocoPrendido(i, j);
+				} else {
+					ventanaJuego.cambiarImagenesFocoApagado(i, j);
+				}
+			}
+		}
+	}
+	
+	public void juegoFacil(ActionEvent f) {
+		ventanaDif.ocultar();
+		ventanaJuego.show();
+		juego.crearGrilla(1);		
+		juego.getGrilla().iniciarGrilla();
+		ventanaJuego.tamanioGrilla(1);
 		for (int i = 0; i < juego.getGrilla().longitud(); i++) {
 			for (int j = 0; j < juego.getGrilla().longitud(); j++) {
 				if (juego.getGrilla().estadoCasilla(i, j) == true) {

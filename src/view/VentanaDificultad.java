@@ -20,6 +20,7 @@ public class VentanaDificultad extends JFrame {
 	private JFrame ventanaDif;
 	private JButton btnNormal;
 	private JButton btnDificil;
+	private JButton btnFacil;
 	private JLabel lblTitulo;
 
 
@@ -60,16 +61,16 @@ public class VentanaDificultad extends JFrame {
 		
 		lblTitulo = new JLabel("Seleccione la dificultad");
 		lblTitulo.setFont(new Font("Snap ITC", Font.PLAIN, 17));
-		lblTitulo.setBounds(49, 37, 232, 30);
+		lblTitulo.setBounds(51, 24, 232, 30);
 		ventanaDif.getContentPane().add(lblTitulo);
-				
-				
+
+		
 		//Boton dificultad dificil
 		btnDificil = new JButton("Dificil");
 		btnDificil.setPreferredSize(new Dimension(75, 25));
 		btnDificil.setFont(new Font("Snap ITC", Font.PLAIN, 14));
 		btnDificil.setBackground(new Color(255, 255, 255));
-		btnDificil.setBounds(115, 154, 100, 30);
+		btnDificil.setBounds(117, 186, 100, 30);
 		ventanaDif.getContentPane().add(btnDificil);
 		
 		//Boton dificultad normal
@@ -77,8 +78,16 @@ public class VentanaDificultad extends JFrame {
 		btnNormal.setPreferredSize(new Dimension(75, 25));
 		btnNormal.setFont(new Font("Snap ITC", Font.PLAIN, 14));
 		btnNormal.setBackground(new Color(255, 255, 255));
-		btnNormal.setBounds(115, 102, 100, 30);
+		btnNormal.setBounds(117, 132, 100, 30);
 		ventanaDif.getContentPane().add(btnNormal);
+		
+		//Boton dificultad facil
+		btnFacil = new JButton("Facil");
+		btnFacil.setPreferredSize(new Dimension(75, 25));
+		btnFacil.setFont(new Font("Snap ITC", Font.PLAIN, 14));
+		btnFacil.setBackground(new Color(255, 255, 255));
+		btnFacil.setBounds(117, 78, 100, 30);
+		ventanaDif.getContentPane().add(btnFacil);
 	
 	}
 		
@@ -93,6 +102,10 @@ public class VentanaDificultad extends JFrame {
 	public JButton getBtnDificil() {
 		return btnDificil;
 	}
+	
+	public JButton getBtnFacil() {
+		return btnFacil;
+	}
 
 	public void setBtnDificil(JButton btnDificil) {
 		this.btnDificil = btnDificil;
@@ -105,5 +118,4 @@ public class VentanaDificultad extends JFrame {
 	public void ocultar() {
 		this.ventanaDif.dispose();
 	}
-
 }
