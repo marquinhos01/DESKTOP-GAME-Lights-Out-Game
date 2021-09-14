@@ -44,6 +44,7 @@ public class VentanaDificultad extends JFrame {
 		int alto = tamanoPantalla.height;
 		
 		ventanaDif= new JFrame();
+		ventanaDif.setResizable(false);
 		ventanaDif.getContentPane().setBackground(new Color(0, 153, 153));
 		ventanaDif.setBackground(Color.WHITE);
 		ventanaDif.setBounds(anchoPantallaPC/2-175, alto/2-140, 350, 280);
